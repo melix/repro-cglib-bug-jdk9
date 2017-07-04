@@ -1,0 +1,24 @@
+apply plugin: 'groovy'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    testCompile 'org.codehaus.groovy:groovy:2.4.11'
+    testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
+    testCompile 'cglib:cglib-nodep:3.2.5'
+    testCompile 'org.objenesis:objenesis:1.2'
+}
+
+def java9Home = System.getenv('JAVA_9')
+
+if (!java9Home) {
+   throw new GradleException("To reproduce this bug, make sure you set the JAVA_9 environment variable to your JDK 9 installation")
+}
+
+test {
+   executable = "$java9Home/bin/java"
+}
+
+
